@@ -14,6 +14,14 @@
 
 项目、技能和产品未来也可能各自拥有独立的代码仓库，但这个仓库仍然是整体规划、内容提炼和长期组织的主工作区。
 
+正式内容统一放在 `content/` 目录下：
+
+- `content/projects/`
+- `content/skills/`
+- `content/products/`
+- `content/articles/`
+- `content/videos/`
+
 ## 核心职责
 
 在这个仓库里，智能体的默认职责不只是回答用户眼前的问题。

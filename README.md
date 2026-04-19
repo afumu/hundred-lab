@@ -42,20 +42,38 @@
 - [仓库规则](./AGENTS.md)
 - [工作流](./docs/workflow.md)
 
+## 当前仓库结构
+
+当前仓库分为几层：
+
+- `content/`：正式内容区
+- `candidates/`：候选池
+- `docs/`：规则与计划文档
+- `templates/`：标准模板
+- `assets/`：公共素材
+- `scripts/`：自动化脚本
+- `registry/`：全局索引和台账
+- `archive/`：归档内容
+
 ## 后续目录规划
 
 后续会逐步完善以下目录：
 
 ```text
-projects/
-skills/
-products/
-articles/
-videos/
+content/
+├── projects/
+├── skills/
+├── products/
+├── articles/
+└── videos/
+
 candidates/
 docs/
 assets/
 scripts/
+registry/
+templates/
+archive/
 ```
 
 ## 目标

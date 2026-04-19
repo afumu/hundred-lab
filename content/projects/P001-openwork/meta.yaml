@@ -1,0 +1,16 @@
+id: P001
+title: OpenWork
+slug: openwork
+status: active
+visibility: public
+tags:
+  - open-source
+  - agent-platform
+  - browser-based
+  - ai-workspace
+  - runtime-isolation
+repo: https://github.com/afumu/openwork
+source_type: external-github-repo
+related_products: []
+related_articles: []
+related_videos: []

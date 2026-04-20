@@ -59,6 +59,7 @@ const kindLabelMap = {
 ---
 
 <article class="entry-card">
+  {href && <a class="card-hitarea" href={href} aria-label={`查看 ${entry.title} 的详情`}></a>}
   <div class="entry-card__meta">
     <span class="entry-card__kind">{kindLabelMap[entry.kind]}</span>
     {entry.status && <span class="entry-card__status">{statusLabelMap[entry.status] ?? entry.status}</span>}

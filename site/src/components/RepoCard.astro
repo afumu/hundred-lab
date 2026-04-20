@@ -32,6 +32,7 @@ const tagLabelMap: Record<string, string> = {
 ---
 
 <article class="repo-card">
+  {repo.docHref && <a class="card-hitarea" href={repo.docHref} aria-label={`查看 ${repo.title} 的文档`}></a>}
   <div class="repo-card__header">
     <span class="repo-card__source">{sourceLabelMap[repo.source]}</span>
     <h3>{repo.title}</h3>
@@ -40,7 +41,10 @@ const tagLabelMap: Record<string, string> = {
   <ul class="tag-list">
     {repo.tags.map((tag) => <li>{tagLabelMap[tag] ?? tag}</li>)}
   </ul>
-  <a class="repo-card__link" href={repo.repo} target="_blank" rel="noreferrer">
-    打开仓库
-  </a>
+  <div class="repo-card__footer">
+    {repo.docHref && <a class="repo-card__link repo-card__link--doc" href={repo.docHref}>查看文档</a>}
+    <a class="repo-card__link" href={repo.repo} target="_blank" rel="noreferrer">
+      打开仓库
+    </a>
+  </div>
 </article>

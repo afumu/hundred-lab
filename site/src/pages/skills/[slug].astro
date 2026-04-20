@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MarkdownArticle } from '../../components/MarkdownArticle';
+import { buildContentIndex, getEntryByKindAndSlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const { skills } = await buildContentIndex();
+
+  return skills.map((entry) => ({
+    params: { slug: entry.slug },
+  }));
+}
+
+const entry = await getEntryByKindAndSlug('skill', Astro.params.slug ?? '');
+
+if (!entry) {
+  throw new Error(`Skill not found for slug: ${Astro.params.slug}`);
+}
+---
+
+<BaseLayout title={`${entry.title} · 百创计划`} description={entry.summary}>
+  <article class="shell article-shell">
+    <div>
+      <p class="eyebrow">技能</p>
+      <h1>{entry.title}</h1>
+      <p>{entry.summary}</p>
+    </div>
+    <MarkdownArticle markdown={entry.readme ?? ''} />
+  </article>
+</BaseLayout>

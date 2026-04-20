@@ -20,6 +20,14 @@ const categoryMap: Record<ContentKind, string> = {
 
 const categoryOrder: ContentKind[] = ['project', 'product', 'skill', 'article', 'video'];
 
+const detailBaseByKind: Partial<Record<ContentKind, string>> = {
+  project: 'projects',
+  product: 'products',
+  skill: 'skills',
+  article: 'articles',
+  tool: 'tools',
+};
+
 interface EntryMeta {
   id?: string;
   title?: string;
@@ -148,6 +156,7 @@ export async function buildRepoCards() {
       repo: entry.repo,
       tags: entry.tags,
       source: 'formal-entry',
+      docHref: getDetailHref(entry.kind, entry.slug),
     });
   }
 
@@ -157,6 +166,38 @@ export async function buildRepoCards() {
 export async function getArticleBySlug(slug: string) {
   const index = await buildContentIndex();
   return index.articles.find((entry) => entry.slug === slug);
+}
+
+function getCollectionByKind(index: ContentIndex, kind: ContentKind) {
+  switch (kind) {
+    case 'project':
+      return index.projects;
+    case 'product':
+      return index.products;
+    case 'skill':
+      return index.skills;
+    case 'article':
+      return index.articles;
+    case 'video':
+      return index.videos;
+    case 'tool':
+      return index.tools;
+  }
+}
+
+export function getDetailHref(kind: ContentKind, slug: string) {
+  const base = detailBaseByKind[kind];
+  return base ? `/${base}/${slug}` : undefined;
+}
+
+export async function getEntryByKindAndSlug(kind: ContentKind, slug: string) {
+  const index = await buildContentIndex();
+  return getCollectionByKind(index, kind).find((entry) => entry.slug === slug);
+}
+
+export async function getEntriesByKind(kind: ContentKind) {
+  const index = await buildContentIndex();
+  return getCollectionByKind(index, kind);
 }
 
 function inferToolTags(dirPath: string, readme?: string) {

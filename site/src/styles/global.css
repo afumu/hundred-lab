@@ -601,6 +601,13 @@ li {
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
 }
 
+.card-hitarea {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
 .entry-card:hover,
 .repo-card:hover {
   transform: translateY(-4px);
@@ -625,6 +632,8 @@ li {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
+  position: relative;
+  z-index: 2;
 }
 
 .entry-card h3,
@@ -632,6 +641,15 @@ li {
   margin-top: 16px;
   font-size: 1.55rem;
   position: relative;
+  z-index: 2;
+}
+
+.entry-card > p,
+.repo-card > p,
+.tag-list,
+.repo-card__footer {
+  position: relative;
+  z-index: 2;
 }
 
 .entry-card__status {
@@ -770,6 +788,14 @@ li {
 .repo-card__link {
   display: inline-flex;
   align-items: center;
+}
+
+.repo-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 22px;
 }
 
 .repo-card__link::after,

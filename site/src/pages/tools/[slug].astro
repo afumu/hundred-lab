@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MarkdownArticle } from '../../components/MarkdownArticle';
+import { buildContentIndex, getEntryByKindAndSlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const { tools } = await buildContentIndex();
+
+  return tools.map((entry) => ({
+    params: { slug: entry.slug },
+  }));
+}
+
+const entry = await getEntryByKindAndSlug('tool', Astro.params.slug ?? '');
+
+if (!entry) {
+  throw new Error(`Tool not found for slug: ${Astro.params.slug}`);
+}
+---
+
+<BaseLayout title={`${entry.title} · 百创计划`} description={entry.summary}>
+  <article class="shell article-shell">
+    <div>
+      <p class="eyebrow">工具</p>
+      <h1>{entry.title}</h1>
+      <p>{entry.summary}</p>
+      {entry.repo && (
+        <p>
+          <a href={entry.repo} target="_blank" rel="noreferrer">查看 GitHub 仓库</a>
+        </p>
+      )}
+    </div>
+    <MarkdownArticle markdown={entry.readme ?? ''} />
+  </article>
+</BaseLayout>

@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EntryCard from '../components/EntryCard.astro';
 import { buildContentIndex } from '../lib/content';
+import { withBase } from '../lib/site';
 
 const { tools } = await buildContentIndex();
 ---
@@ -15,7 +16,7 @@ const { tools } = await buildContentIndex();
       它们共同构成百创计划的操作系统。
     </p>
     <div class="cards cards--tools">
-      {tools.map((entry) => <EntryCard entry={entry} />)}
+      {tools.map((entry) => <EntryCard entry={entry} href={withBase(`tools/${entry.slug}`)} />)}
     </div>
   </section>
 </BaseLayout>

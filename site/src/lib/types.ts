@@ -32,4 +32,5 @@ export interface RepoCard {
   repo: string;
   tags: string[];
   source: 'local' | 'formal-entry';
+  docHref?: string;
 }

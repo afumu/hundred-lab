@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EntryCard from '../components/EntryCard.astro';
 import { buildContentIndex } from '../lib/content';
+import { withBase } from '../lib/site';
 
 const { skills } = await buildContentIndex();
 ---
@@ -12,7 +13,7 @@ const { skills } = await buildContentIndex();
     <h1>正式技能</h1>
     <p>这里展示方法论、流程和可复用工作方式的正式沉淀结果。</p>
     <div class="cards">
-      {skills.map((entry) => <EntryCard entry={entry} />)}
+      {skills.map((entry) => <EntryCard entry={entry} href={withBase(`skills/${entry.slug}`)} />)}
     </div>
   </section>
 </BaseLayout>

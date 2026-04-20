@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EntryCard from '../components/EntryCard.astro';
 import { buildContentIndex } from '../lib/content';
+import { withBase } from '../lib/site';
 
 const { projects } = await buildContentIndex();
 ---
@@ -12,7 +13,7 @@ const { projects } = await buildContentIndex();
     <h1>正式项目</h1>
     <p>这里展示百创计划中的正式开源项目，源码仍在各自独立仓库中持续演化。</p>
     <div class="cards">
-      {projects.map((entry) => <EntryCard entry={entry} />)}
+      {projects.map((entry) => <EntryCard entry={entry} href={withBase(`projects/${entry.slug}`)} />)}
     </div>
   </section>
 </BaseLayout>

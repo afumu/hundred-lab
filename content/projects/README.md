@@ -7,3 +7,4 @@
 ## 已记录项目
 
 - [P001 OpenWork](./P001-openwork/)：面向组织部署的浏览器智能体平台，源码仓库为 <https://github.com/afumu/openwork>。
+- [P002 OpenLink](./P002-openlink/)：让网页版 AI 访问本地文件系统和执行命令的学习研究项目，源码仓库为 <https://github.com/afumu/openlink>。

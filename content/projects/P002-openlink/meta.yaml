@@ -1,0 +1,16 @@
+id: P002
+title: OpenLink
+slug: openlink
+status: active
+visibility: public
+tags:
+  - open-source
+  - browser-extension
+  - local-tools
+  - ai-agent
+  - go
+repo: https://github.com/afumu/openlink
+source_type: external-github-repo
+related_products: []
+related_articles: []
+related_videos: []

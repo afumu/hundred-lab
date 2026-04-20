@@ -52,6 +52,7 @@
 - `content/`：正式内容区
 - `docs/`：规则与计划文档
 - `templates/`：标准模板
+- `tools/`：常见工具最佳实践
 - `assets/`：公共素材
 - `scripts/`：自动化脚本
 - `registry/`：全局索引和台账
@@ -72,6 +73,7 @@ content/
 └── videos/
 
 docs/
+tools/
 assets/
 scripts/
 registry/

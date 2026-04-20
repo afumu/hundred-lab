@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EntryCard from '../components/EntryCard.astro';
+import { buildContentIndex } from '../lib/content';
+
+const { videos } = await buildContentIndex();
+---
+
+<BaseLayout title="视频 · 百创计划" description="百创计划中的正式视频条目。">
+  <section class="shell listing-shell">
+    <p class="eyebrow">视频</p>
+    <h1>正式视频</h1>
+    <p>视频区会逐步承接演示、讲解和可视化表达内容。</p>
+    {videos.length > 0 ? (
+      <div class="cards">
+        {videos.map((entry) => <EntryCard entry={entry} />)}
+      </div>
+    ) : (
+      <div class="empty-state">当前还没有正式视频条目。</div>
+    )}
+  </section>
+</BaseLayout>

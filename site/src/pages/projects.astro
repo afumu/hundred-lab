@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EntryCard from '../components/EntryCard.astro';
+import { buildContentIndex } from '../lib/content';
+
+const { projects } = await buildContentIndex();
+---
+
+<BaseLayout title="项目 · 百创计划" description="百创计划中的正式开源项目。">
+  <section class="shell listing-shell">
+    <p class="eyebrow">项目</p>
+    <h1>正式项目</h1>
+    <p>这里展示百创计划中的正式开源项目，源码仍在各自独立仓库中持续演化。</p>
+    <div class="cards">
+      {projects.map((entry) => <EntryCard entry={entry} />)}
+    </div>
+  </section>
+</BaseLayout>

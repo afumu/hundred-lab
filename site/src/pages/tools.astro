@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EntryCard from '../components/EntryCard.astro';
+import { buildContentIndex } from '../lib/content';
+
+const { tools } = await buildContentIndex();
+---
+
+<BaseLayout title="工具 · 百创计划" description="百创计划中的软件工具实践与工作流。">
+  <section class="shell listing-shell">
+    <p class="eyebrow">工具</p>
+    <h1>工具层与工作流基础设施</h1>
+    <p>
+      这里展示的不是正式产品，而是你日常真正依赖的工具层：输入、远程控制、账号管理、网络连接和多工具协作。
+      它们共同构成百创计划的操作系统。
+    </p>
+    <div class="cards cards--tools">
+      {tools.map((entry) => <EntryCard entry={entry} />)}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,46 @@
+---
+import type { RepoCard } from '../lib/types';
+
+interface Props {
+  repo: RepoCard;
+}
+
+const { repo } = Astro.props;
+const sourceLabelMap = {
+  local: '主仓库',
+  'formal-entry': '正式条目',
+} as const;
+const tagLabelMap: Record<string, string> = {
+  'meta-repo': '母仓库',
+  'content-system': '内容系统',
+  'product-first': '产品优先',
+  'ai-product': 'AI 产品',
+  'agent-runtime': 'Agent 运行时',
+  'full-stack': '全栈',
+  'chat-system': '聊天系统',
+  'management-console': '管理后台',
+  'open-source': '开源',
+  'agent-platform': 'Agent 平台',
+  'browser-based': '浏览器形态',
+  'ai-workspace': 'AI 工作台',
+  'runtime-isolation': '运行时隔离',
+  'browser-extension': '浏览器扩展',
+  'local-tools': '本地工具',
+  'ai-agent': 'AI Agent',
+  go: 'Go',
+};
+---
+
+<article class="repo-card">
+  <div class="repo-card__header">
+    <span class="repo-card__source">{sourceLabelMap[repo.source]}</span>
+    <h3>{repo.title}</h3>
+  </div>
+  <p>{repo.summary}</p>
+  <ul class="tag-list">
+    {repo.tags.map((tag) => <li>{tagLabelMap[tag] ?? tag}</li>)}
+  </ul>
+  <a class="repo-card__link" href={repo.repo} target="_blank" rel="noreferrer">
+    打开仓库
+  </a>
+</article>

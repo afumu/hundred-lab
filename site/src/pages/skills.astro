@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EntryCard from '../components/EntryCard.astro';
+import { buildContentIndex } from '../lib/content';
+
+const { skills } = await buildContentIndex();
+---
+
+<BaseLayout title="技能 · 百创计划" description="百创计划中的正式技能。">
+  <section class="shell listing-shell">
+    <p class="eyebrow">技能</p>
+    <h1>正式技能</h1>
+    <p>这里展示方法论、流程和可复用工作方式的正式沉淀结果。</p>
+    <div class="cards">
+      {skills.map((entry) => <EntryCard entry={entry} />)}
+    </div>
+  </section>
+</BaseLayout>

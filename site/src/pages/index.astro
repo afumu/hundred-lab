@@ -1,0 +1,173 @@
+---
+import Hero from '../components/Hero.astro';
+import RepoCard from '../components/RepoCard.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { buildContentIndex, buildRepoCards } from '../lib/content';
+import { withBase } from '../lib/site';
+
+const index = await buildContentIndex();
+const repos = await buildRepoCards();
+const totalItems = index.projects.length + index.products.length + index.skills.length + index.articles.length + index.videos.length;
+const featuredTool = index.tools.find((entry) => entry.slug === 'yepanywhere') ?? index.tools.find((entry) => entry.slug === 'codex') ?? index.tools[0];
+const featuredProject = index.projects.find((entry) => entry.slug === 'openwork') ?? index.projects[0];
+const featuredProduct = index.products.find((entry) => entry.slug === 'coremi') ?? index.products[0];
+const featuredArticle = index.articles.find((entry) => entry.slug === 'remote-control-codex-with-anywhere') ?? index.articles[0];
+
+const featuredCards = [
+  featuredTool && {
+    eyebrow: '工具入口',
+    title: featuredTool.title,
+    description: featuredTool.summary,
+    href: withBase('tools'),
+    cta: '查看工具层',
+  },
+  featuredProject && {
+    eyebrow: '代表项目',
+    title: featuredProject.title,
+    description: featuredProject.summary,
+    href: withBase('projects'),
+    cta: '查看项目',
+  },
+  featuredProduct && {
+    eyebrow: '代表产品',
+    title: featuredProduct.title,
+    description: featuredProduct.summary,
+    href: withBase('products'),
+    cta: '查看产品',
+  },
+  featuredArticle && {
+    eyebrow: '最新表达',
+    title: featuredArticle.title,
+    description: featuredArticle.summary,
+    href: withBase(`articles/${featuredArticle.slug}`),
+    cta: '阅读文章',
+  },
+].filter(Boolean) as Array<{
+  eyebrow: string;
+  title: string;
+  description: string;
+  href: string;
+  cta: string;
+}>;
+
+const workflowSteps = [
+  {
+    title: '记录想法',
+    description: '先把口述、碎片判断和原始上下文收进 Idea 或工具实践。',
+  },
+  {
+    title: '交给 Agent',
+    description: '把整理、提炼、编码、改写和结构化工作交给 Codex 执行。',
+  },
+  {
+    title: '做成条目',
+    description: '把内容升级成项目、产品、技能、文章或视频中的一种正式资产。',
+  },
+  {
+    title: '公开发布',
+    description: '最终进入仓库、站点、GitHub 页面和对外传播渠道。',
+  },
+];
+
+const exploreLinks = [
+  {
+    label: '工具',
+    href: withBase('tools'),
+    count: index.tools.length,
+    summary: '输入、控制、网络与账号基础设施',
+  },
+  {
+    label: '项目',
+    href: withBase('projects'),
+    count: index.projects.length,
+    summary: '独立演化的开源实验与工程实现',
+  },
+  {
+    label: '产品',
+    href: withBase('products'),
+    count: index.products.length,
+    summary: '从真实使用中长出来的产品表达',
+  },
+  {
+    label: '技能',
+    href: withBase('skills'),
+    count: index.skills.length,
+    summary: '可复用的方法、流程与判断框架',
+  },
+  {
+    label: '文章',
+    href: withBase('articles'),
+    count: index.articles.length,
+    summary: '长期表达与持续更新的公开内容',
+  },
+  {
+    label: '视频',
+    href: withBase('videos'),
+    count: index.videos.length,
+    summary: '演示、讲解与可视化表达内容',
+  },
+];
+---
+
+<BaseLayout title="百创计划" description="百创计划的公开资产地图。">
+  <Hero totalItems={totalItems} toolCount={index.tools.length} articleCount={index.articles.length} repoCount={repos.length} />
+
+  <section class="shell home-section">
+    <div class="home-section__intro">
+      <p class="eyebrow">精选作品</p>
+      <h2>先看最能代表这套工作方式的几个样本。</h2>
+    </div>
+    <div class="featured-grid">
+      {featuredCards.map((card) => (
+        <a class="feature-card" href={card.href}>
+          <span class="feature-card__eyebrow">{card.eyebrow}</span>
+          <h3>{card.title}</h3>
+          <p>{card.description}</p>
+          <span class="feature-card__cta">{card.cta}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="shell home-section">
+    <div class="home-section__intro">
+      <p class="eyebrow">工作方式</p>
+      <h2>这是一条持续循环的生产链路。</h2>
+    </div>
+    <div class="workflow-grid">
+      {workflowSteps.map((step, index) => (
+        <div class="workflow-card">
+          <span class="workflow-card__index">0{index + 1}</span>
+          <h3>{step.title}</h3>
+          <p>{step.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="shell home-section">
+    <div class="home-section__intro">
+      <p class="eyebrow">继续探索</p>
+      <h2>从下面这些入口继续展开完整内容。</h2>
+    </div>
+    <div class="explore-grid">
+      {exploreLinks.map((entry) => (
+        <a class="explore-card" href={entry.href}>
+          <span class="explore-card__label">{entry.label}</span>
+          <strong>{entry.count > 0 ? `${entry.count} 个` : '筹备中'}</strong>
+          <p>{entry.summary}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="shell home-section">
+    <div class="home-section__intro">
+      <p class="eyebrow">GitHub 仓库</p>
+      <h2>主仓库负责沉淀，外部仓库负责演化。</h2>
+    </div>
+    <div class="repo-grid repo-grid--home">
+      {repos.map((repo) => <RepoCard repo={repo} />)}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,59 @@
+---
+import { withBase } from '../lib/site';
+
+interface Props {
+  totalItems: number;
+  toolCount: number;
+  articleCount: number;
+  repoCount: number;
+}
+
+const { totalItems, toolCount, articleCount, repoCount } = Astro.props;
+---
+
+<section class="hero shell">
+  <div class="hero__copy">
+    <p class="eyebrow">百创计划</p>
+    <p class="hero__kicker">公开实验室 / 项目、产品、文章与工具</p>
+    <h1>把真实工作，整理成可以持续增长的公开资产。</h1>
+    <p class="hero__lead">
+      这里不是单一项目站，也不是普通作品集，而是一个把工具、项目、产品、技能与文章串成同一条工作链路的长期实验场。
+    </p>
+    <div class="hero__actions">
+      <a class="button button--primary" href={withBase('articles')}>阅读文章</a>
+      <a class="button button--ghost" href={withBase('projects')}>查看项目</a>
+    </div>
+  </div>
+
+  <aside class="hero__visual" aria-label="工作链路图">
+    <div class="hero__constellation">
+      <div class="hero__ring hero__ring--outer"></div>
+      <div class="hero__ring hero__ring--inner"></div>
+      <div class="hero__core">
+        <span>百创计划</span>
+      </div>
+      <div class="hero__node hero__node--idea">想法</div>
+      <div class="hero__node hero__node--build">实现</div>
+      <div class="hero__node hero__node--ship">沉淀</div>
+      <div class="hero__node hero__node--publish">发布</div>
+    </div>
+    <div class="hero__metrics">
+      <div class="hero__metric">
+        <span class="hero__stat-label">正式资产</span>
+        <strong>{totalItems}</strong>
+      </div>
+      <div class="hero__metric">
+        <span class="hero__stat-label">工具</span>
+        <strong>{toolCount}</strong>
+      </div>
+      <div class="hero__metric">
+        <span class="hero__stat-label">文章</span>
+        <strong>{articleCount}</strong>
+      </div>
+      <div class="hero__metric">
+        <span class="hero__stat-label">仓库</span>
+        <strong>{repoCount}</strong>
+      </div>
+    </div>
+  </aside>
+</section>

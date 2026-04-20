@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { MarkdownArticle } from '../../components/MarkdownArticle';
+import { buildContentIndex, getArticleBySlug } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const { articles } = await buildContentIndex();
+
+  return articles.map((entry) => ({
+    params: { slug: entry.slug },
+  }));
+}
+
+const article = await getArticleBySlug(Astro.params.slug ?? '');
+
+if (!article) {
+  throw new Error(`Article not found for slug: ${Astro.params.slug}`);
+}
+---
+
+<BaseLayout title={`${article.title} · 百创计划`} description={article.summary}>
+  <article class="shell article-shell">
+    <div>
+      <p class="eyebrow">文章</p>
+      <h1>{article.title}</h1>
+      <p>{article.summary}</p>
+    </div>
+    <MarkdownArticle markdown={article.markdown ?? ''} />
+  </article>
+</BaseLayout>

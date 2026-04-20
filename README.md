@@ -43,6 +43,7 @@
 
 - [仓库规则](./AGENTS.md)
 - [工作流](./docs/workflow.md)
+- [站点说明](./site/README.md)
 
 ## 当前仓库结构
 
@@ -50,6 +51,7 @@
 
 - `ideas/`：原始想法池
 - `content/`：正式内容区
+- `site/`：百创计划展示站点
 - `docs/`：规则与计划文档
 - `templates/`：标准模板
 - `tools/`：常见工具最佳实践

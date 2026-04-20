@@ -1,0 +1,50 @@
+---
+import '../styles/global.css';
+import { withBase } from '../lib/site';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = '百创计划公开资产地图。' } = Astro.props;
+const navItems = [
+  ['工具', withBase('tools')],
+  ['项目', withBase('projects')],
+  ['产品', withBase('products')],
+  ['技能', withBase('skills')],
+  ['文章', withBase('articles')],
+  ['视频', withBase('videos')],
+];
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href={withBase('favicon.svg')} />
+  </head>
+  <body>
+    <div class="site-bg"></div>
+    <header class="topbar shell">
+      <a class="brand" href={withBase()}>
+        <span class="brand__dot"></span>
+        <span>百创计划</span>
+      </a>
+      <div class="topbar__right">
+        <div class="status-pill">公开资产地图</div>
+        <nav class="nav">
+          {navItems.map(([label, href]) => (
+            <a href={href}>{label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+  </body>
+</html>

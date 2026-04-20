@@ -1,0 +1,29 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  href?: string;
+  ctaLabel?: string;
+}
+
+const { eyebrow, title, description, href, ctaLabel = '查看全部' } = Astro.props;
+---
+
+<section class="section shell">
+  <div class="section__header">
+    <div>
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h2>{title}</h2>
+      {description && <p class="section__lead">{description}</p>}
+    </div>
+    {href && (
+      <a class="section__link" href={href}>
+        {ctaLabel}
+      </a>
+    )}
+  </div>
+  <div class="section__body">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import EntryCard from '../../components/EntryCard.astro';
+import { buildContentIndex } from '../../lib/content';
+import { withBase } from '../../lib/site';
+
+const { articles } = await buildContentIndex();
+---
+
+<BaseLayout title="文章 · 百创计划" description="百创计划中的正式文章。">
+  <section class="shell listing-shell">
+    <p class="eyebrow">文章</p>
+    <h1>正式文章</h1>
+    <p>这里直接展示仓库内已经存在的正式文章条目，详情页按 Markdown 静态渲染。</p>
+    <div class="cards">
+      {articles.map((entry) => <EntryCard entry={entry} href={withBase(`articles/${entry.slug}`)} />)}
+    </div>
+  </section>
+</BaseLayout>

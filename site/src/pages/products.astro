@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EntryCard from '../components/EntryCard.astro';
+import { buildContentIndex } from '../lib/content';
+
+const { products } = await buildContentIndex();
+---
+
+<BaseLayout title="产品 · 百创计划" description="百创计划中的正式产品。">
+  <section class="shell listing-shell">
+    <p class="eyebrow">产品</p>
+    <h1>正式产品</h1>
+    <p>这里展示当前已经进入正式沉淀层的产品条目，包括定位、能力边界和源码入口。</p>
+    <div class="cards">
+      {products.map((entry) => <EntryCard entry={entry} />)}
+    </div>
+  </section>
+</BaseLayout>

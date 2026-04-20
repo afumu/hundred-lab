@@ -1,0 +1,81 @@
+---
+import type { ContentEntry } from '../lib/types';
+
+interface Props {
+  entry: ContentEntry;
+  href?: string;
+}
+
+const { entry, href } = Astro.props;
+const tagLabelMap: Record<string, string> = {
+  codex: 'Codex',
+  yepanywhere: 'YepAnywhere',
+  'cockpit-tools': 'Cockpit Tools',
+  'mobile-workflow': '移动工作流',
+  'ai-coding': 'AI 编程',
+  'personal-productivity': '个人效率',
+  'ai-product': 'AI 产品',
+  'agent-runtime': 'Agent 运行时',
+  'full-stack': '全栈',
+  'chat-system': '聊天系统',
+  'management-console': '管理后台',
+  'open-source': '开源',
+  'agent-platform': 'Agent 平台',
+  'browser-based': '浏览器形态',
+  'ai-workspace': 'AI 工作台',
+  'runtime-isolation': '运行时隔离',
+  'browser-extension': '浏览器扩展',
+  'local-tools': '本地工具',
+  'ai-agent': 'AI Agent',
+  go: 'Go',
+  'meta-skill': '元技能',
+  extraction: '提炼',
+  'product-first': '产品优先',
+  workflow: '工作流',
+  software: '软件工具',
+  'claude-code': 'Claude Code',
+  'mobile-control': '移动控制',
+  'voice-input': '语音输入',
+  'account-management': '账号管理',
+  network: '网络基础设施',
+  'meta-repo': '母仓库',
+  'content-system': '内容系统',
+};
+const statusLabelMap: Record<string, string> = {
+  active: '进行中',
+  draft: '草稿',
+  public: '公开',
+};
+const tags = entry.tags.slice(0, 4).map((tag) => tagLabelMap[tag] ?? tag);
+const footerLabel = entry.kind === 'tool' ? '工作流笔记' : '正式条目';
+const kindLabelMap = {
+  project: '项目',
+  product: '产品',
+  skill: '技能',
+  article: '文章',
+  video: '视频',
+  tool: '工具',
+} as const;
+---
+
+<article class="entry-card">
+  <div class="entry-card__meta">
+    <span class="entry-card__kind">{kindLabelMap[entry.kind]}</span>
+    {entry.status && <span class="entry-card__status">{statusLabelMap[entry.status] ?? entry.status}</span>}
+  </div>
+  <h3>{entry.title}</h3>
+  <p>{entry.summary || '暂无摘要，后续将补充这个条目的说明。'}</p>
+  {tags.length > 0 && (
+    <ul class="tag-list">
+      {tags.map((tag) => <li>{tag}</li>)}
+    </ul>
+  )}
+  <div class="entry-card__footer">
+    {href ? <a href={href}>查看详情</a> : <span class="entry-card__placeholder">{footerLabel}</span>}
+    {entry.repo && (
+      <a href={entry.repo} target="_blank" rel="noreferrer">
+        GitHub
+      </a>
+    )}
+  </div>
+</article>

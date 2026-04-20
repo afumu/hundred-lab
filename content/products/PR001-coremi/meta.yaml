@@ -1,0 +1,17 @@
+id: PR001
+title: Coremi
+slug: coremi
+status: active
+visibility: public
+tags:
+  - ai-product
+  - agent-runtime
+  - full-stack
+  - chat-system
+  - management-console
+repo: https://github.com/afumu/coremi
+source_type: external-github-repo
+related_projects: []
+related_skills: []
+related_articles: []
+related_videos: []
